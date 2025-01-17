@@ -27,7 +27,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "8.57.1",
     "eslint-config-next": "15.0.4",
     "eslint-plugin-import": "^2.31.0",
     "postcss": "^8",
