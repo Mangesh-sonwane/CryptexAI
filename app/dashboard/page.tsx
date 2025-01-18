@@ -1,13 +1,16 @@
 "use client";
 import React from "react";
+import LeftSideBar from "../Components/LeftSidebar/LeftSideBar";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex-center h-screen">
-      <h1 className="text-dark100_light900 text-2xl font-semibold">
-        Dashboard comming Soon . . .
-      </h1>
-    </div>
+    <>
+      <main className="flex h-screen w-1/4 flex-row">
+        <div className="flex h-full w-1/4">
+          <LeftSideBar />
+        </div>
+      </main>
+    </>
   );
 };
 

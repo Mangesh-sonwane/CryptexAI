@@ -6,7 +6,9 @@ import { ShieldCheckered, SignOut, Wallet } from "@phosphor-icons/react";
 import { usePrivy } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import ROUTES from "@/constants/routes";
+// import { useRouter } from "next/navigation";
+// import { useEffect } from "react";
+// import ROUTES from "@/constants/routes";
 
 const Navbar = () => {
   const { authenticated, login, logout } = usePrivy();
@@ -14,9 +16,9 @@ const Navbar = () => {
 
   useEffect(() => {
     if (authenticated) {
-      router.push(ROUTES.Dashboard);
+      router.push("/insights");
     } else {
-      router.push(ROUTES.HOME);
+      router.push("/");
     }
   }, [authenticated, router]);
 
