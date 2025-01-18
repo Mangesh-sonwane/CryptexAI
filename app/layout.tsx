@@ -4,7 +4,7 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import Providers from "@/context/Providers";
-import Navbar from "./Components/Navbar/Navbar";
+import NavbarLayout from "./NavbarLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,10 +38,7 @@ export default function RootLayout({
         >
           <Providers>
             <>
-              <Navbar />
-              <main className="background-light850_dark100 relative">
-                {children}
-              </main>
+              <NavbarLayout>{children}</NavbarLayout>
             </>
           </Providers>
         </ThemeProvider>
