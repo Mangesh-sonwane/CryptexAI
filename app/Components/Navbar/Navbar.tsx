@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex-between background-light900_dark200 fixed inset-x-0 top-0 z-50 w-full gap-5 p-4 shadow-light-300 dark:shadow-none">
+      <nav className="flex-between background-light900_dark200 fixed inset-x-0 top-0 z-50 w-full gap-5 p-4 shadow-sm dark:shadow-none">
         <Link href="/" className="flex items-center gap-1">
           <ShieldCheckered size={36} color="#FF7000" weight="fill" />
 
