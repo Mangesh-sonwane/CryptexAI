@@ -1,9 +1,10 @@
 import React from "react";
 import "./globals.css";
-import Navbar from "./Components/Navbar/Navbar";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
+import Providers from "@/context/Providers";
+import Navbar from "./Components/Navbar/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +36,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <Providers>
+            <>
+              <Navbar />
+              <main className="background-light850_dark100 relative">
+                {children}
+              </main>
+            </>
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

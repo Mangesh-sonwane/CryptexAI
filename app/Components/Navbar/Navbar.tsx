@@ -2,19 +2,28 @@
 import Link from "next/link";
 import ThemeToggleBtn from "./ThemeToggleBtn";
 import { Button } from "@mui/material";
-import { ShieldCheckered, Wallet } from "@phosphor-icons/react";
+import { ShieldCheckered, SignOut, Wallet } from "@phosphor-icons/react";
+import { usePrivy } from "@privy-io/react-auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import ROUTES from "@/constants/routes";
 
 const Navbar = () => {
+  const { authenticated, login, logout } = usePrivy();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authenticated) {
+      router.push(ROUTES.Dashboard);
+    } else {
+      router.push(ROUTES.HOME);
+    }
+  }, [authenticated, router]);
+
   return (
     <div>
-      <nav className="flex-between background-light900_dark200 fixed z-50 w-full gap-5 p-4 shadow-light-300 dark:shadow-none sm:px-12">
+      <nav className="flex-between background-light900_dark200 fixed inset-x-0 top-0 z-50 w-full gap-5 p-4 shadow-light-300 dark:shadow-none">
         <Link href="/" className="flex items-center gap-1">
-          {/* <Image
-            src="/images/site-logo.svg"
-            alt="Devflow logo"
-            width={23}
-            height={23}
-          /> */}
           <ShieldCheckered size={36} color="#FF7000" weight="fill" />
 
           <p className="h2-bold font-space-grotesk text-dark-100 dark:text-light-900 max-sm:hidden">
@@ -23,14 +32,31 @@ const Navbar = () => {
         </Link>
         <div className="flex-between gap-5">
           <ThemeToggleBtn />
-          <Button
-            variant="contained"
-            size="large"
-            startIcon={<Wallet size={24} weight="fill" />}
-            className=" !rounded-full !bg-primary-500"
-          >
-            Connect
-          </Button>
+          {authenticated ? (
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<SignOut size={24} weight="fill" />}
+              className=" primary-gradient !rounded-full !font-semibold text-light-900"
+              onClick={logout}
+            >
+              Disconnect
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<Wallet size={24} weight="fill" />}
+              className=" primary-gradient !rounded-full !font-semibold text-light-900"
+              onClick={() =>
+                login({
+                  loginMethods: ["wallet", "email", "google", "github"],
+                })
+              }
+            >
+              Connect
+            </Button>
+          )}
         </div>
       </nav>
     </div>
