@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
 import { PaperPlaneTilt } from "@phosphor-icons/react";
+import { formatMarkdown } from "@/constants/format";
 
 interface Message {
   id: number;
@@ -16,6 +17,7 @@ const Chat: React.FC = () => {
   const [input, setInput] = useState("");
   const chatRef = useRef<HTMLDivElement>(null);
 
+  // Scroll to the bottom when messages change
   useEffect(() => {
     chatRef.current?.scrollTo({
       top: chatRef.current.scrollHeight,
@@ -37,10 +39,7 @@ const Chat: React.FC = () => {
     setInput("");
 
     try {
-      const response = await axios.post("/api/chat", {
-        message: input,
-      });
-      console.log(response.data.reply);
+      const response = await axios.post("/api/chat", { message: input });
 
       if (response.data && response.data.reply) {
         const botMessage: Message = {
@@ -67,8 +66,9 @@ const Chat: React.FC = () => {
 
   return (
     <div className="flex h-full flex-col">
+      {/* Chat Messages */}
       <div
-        className=" background-light800_darkgradient h-[600px] grow overflow-y-auto p-4"
+        className="background-light800_darkgradient h-[600px] grow overflow-y-auto p-4"
         ref={chatRef}
       >
         {messages.map((msg) => (
@@ -80,18 +80,19 @@ const Chat: React.FC = () => {
               className={`inline-block rounded-lg px-4 py-2 ${
                 msg.sender === "user"
                   ? "primary-gradient text-white"
-                  : "bg-gray-200 text-black"
-              }`}
-            >
-              {msg.text}
-            </p>
+                  : "text-dark400_light500 background-light700_dark300 text-sm font-normal"
+              } max-w-[70%]`}
+              dangerouslySetInnerHTML={{ __html: formatMarkdown(msg.text) }}
+            />
             <p className="mt-2 text-sm font-normal leading-5 text-gray-500">
               {msg.timestamp}
             </p>
           </div>
         ))}
       </div>
-      <div className="background-light900_dark200 flex gap-4 p-4 ">
+
+      {/* Input Box */}
+      <div className="background-light900_dark200 flex gap-4 p-4">
         <input
           type="text"
           value={input}
