@@ -82,3 +82,22 @@ export function formatZeros(price: unknown): unknown {
     }
   }
 }
+
+export const formatMarkdown = (text: string) => {
+  // Bold formatting: **bold text**
+  text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+  // Italic formatting: *italic text*
+  text = text.replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+  // Bullet points: * text
+  text = text.replace(/^\*\s(.*)$/gm, "<ul><li>$1</li></ul>");
+
+  // Convert line breaks for paragraphs
+  text = text
+    .split("\n")
+    .map((line) => `<p>${line}</p>`)
+    .join("");
+
+  return text;
+};
