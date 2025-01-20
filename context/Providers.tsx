@@ -3,11 +3,12 @@
 import React from "react";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider } from "@privy-io/wagmi";
+// import { WagmiProvider } from "@privy-io/wagmi";
 import { config } from "./config";
 
 import { SmartWalletsProvider } from "@privy-io/react-auth/smart-wallets";
 import { privyConfig } from "./privyConfig";
+import { WagmiProvider } from "wagmi";
 
 const queryClient = new QueryClient();
 

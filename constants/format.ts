@@ -40,7 +40,7 @@ export function formatWithAbbreviation(price: number): string {
   return price.toString();
 }
 
-export function formatZeros(price: unknown): unknown {
+export const formatZeros = (price: number | null): string | null => {
   const numericPrice = Number(price);
 
   // const numericPriceFormatted =
@@ -81,7 +81,7 @@ export function formatZeros(price: unknown): unknown {
       });
     }
   }
-}
+};
 
 export const formatMarkdown = (text: string) => {
   // Bold formatting: **bold text**
@@ -100,4 +100,8 @@ export const formatMarkdown = (text: string) => {
     .join("");
 
   return text;
+};
+
+export const convertBalanceToReadable = (balance: string, decimals: number) => {
+  return parseFloat(balance) / Math.pow(10, decimals);
 };

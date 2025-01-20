@@ -9,8 +9,8 @@ export default function Home() {
   const { theme } = useTheme();
   const [resolvedTheme, setResolvedTheme] = useState(theme);
 
-  const { ready, authenticated, user, login, logout } = usePrivy();
-  console.log(ready, authenticated, user, login, logout, "helloworld");
+  const { authenticated, user } = usePrivy();
+  console.log(user?.wallet?.address, "helloworld");
 
   useEffect(() => {
     if (theme === "system") {
