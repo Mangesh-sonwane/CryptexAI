@@ -100,3 +100,20 @@ export const fetchMarketChart = async (crypto: string, days: number) => {
     throw new Error("Failed to fetch market chart data");
   }
 };
+
+export const fetchTokenPriceByAddress = async (
+  tokenAddress: string,
+  chain: string
+): Promise<number> => {
+  console.log("🚀 ~ fetchTokenPriceByAddress ~ tokenAddress:", tokenAddress);
+  try {
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/simple/token_price/${chain}?contract_addresses=${tokenAddress}&vs_currencies=usd`
+    );
+    const data = await response.json();
+    return data[tokenAddress.toLowerCase()]?.usd || 0;
+  } catch (error) {
+    console.error("Error fetching price by address:", error);
+    return 0;
+  }
+};

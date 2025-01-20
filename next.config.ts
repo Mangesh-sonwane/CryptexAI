@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     path: "/",
+    domains: ["logo.moralis.io"],
   },
 };
 
