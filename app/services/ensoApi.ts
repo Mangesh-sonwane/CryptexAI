@@ -176,7 +176,7 @@ export const getSwapQuote = async ({
     const response = await axios.post<QuoteResponse>(
       `${ENSO_API_URL}/quote`,
       {
-        chainId: 1,
+        chainId: 8453,
         fromAddress: walletAddress,
         inputToken: sellToken,
         outputToken: buyToken,
