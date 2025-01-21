@@ -22,6 +22,7 @@ export const getWalletTokenDetails = async (
 ): Promise<Token[]> => {
   try {
     await connectMoralis();
+    console.log(process.env.NEXT_PUBLIC_MORALIS, "moralis key");
 
     const response = await Moralis.EvmApi.token.getWalletTokenBalances({
       chain: "0x2105",
